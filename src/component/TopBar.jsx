@@ -1,9 +1,12 @@
-import React from 'react'
+import * as React from "react";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 
-const TopBar = () => {
+export default function DisabledTabs({ value, handleChange }) {
   return (
-    <div>TopBar</div>
-  )
+    <Tabs centered value={value} onChange={handleChange}>
+      <Tab label="Applied jobs" />
+      <Tab label="Search jobs" />
+    </Tabs>
+  );
 }
-
-export default TopBar
