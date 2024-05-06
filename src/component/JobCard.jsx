@@ -72,10 +72,8 @@ function JobCard({ job }) {
     maxJdSalary,
     minJdSalary = 0,
     minExp,
-    salaryCurrencyCode,
     jdLink,
   } = job;
-  console.log({ job });
   return (
     <Card
       sx={{
@@ -110,13 +108,6 @@ function JobCard({ job }) {
             }}
             label=" 📈4 applicants"
           />
-          {/* <Box
-            justifySelf="end"
-            height={50}
-            width={50}
-            border={1}
-            borderRadius={50}
-          ></Box> */}
         </Box>
 
         <Box display="flex" mt={3} gap={1}>
@@ -146,8 +137,7 @@ function JobCard({ job }) {
           </Stack>
         </Box>
         <Typography variant="body2" component="p" className={classes.salary}>
-          Estimated Salary: {salaryCurrencyCode}
-          {minJdSalary} - {maxJdSalary} LPA ⚠️
+          Estimated Salary: ₹{minJdSalary} - ₹{maxJdSalary} LPA ⚠️
         </Typography>
         <Typography
           variant="body2"
@@ -207,7 +197,7 @@ function JobCard({ job }) {
           mb={2}
           fontWeight={400}
         >
-          {minExp} years
+          {minExp || 0} years
         </Typography>
         <Stack gap>
           <a

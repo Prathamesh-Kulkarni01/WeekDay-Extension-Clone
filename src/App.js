@@ -11,7 +11,6 @@ function App() {
   const [tab, setTab] = React.useState(1);
 
   const handleChange = React.useCallback((event, newValue) => {
-    console.log(newValue);
     setTab(newValue);
   }, []);
 

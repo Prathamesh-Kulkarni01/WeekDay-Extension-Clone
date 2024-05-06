@@ -1,21 +1,18 @@
-import {
-  Box,
-  Checkbox,
-  Stack,
-  TextField,
-} from "@mui/material";
+import { Box, Checkbox, Stack, TextField } from "@mui/material";
 import React from "react";
 import Select from "./Select";
 import { FILTER_FIELDS } from "../constants";
 
 const Filters = ({ filter = {}, setFilter = () => {} }) => {
   const handleChange = (key, value) => {
-    console.log(key, value);
     setFilter((prevFilter) => ({ ...prevFilter, [key]: value }));
   };
 
   return (
-    <Stack m={2}>
+    <Stack
+      m={2}
+      sx={{ position: "fixed", top: 30, bgcolor: "white", zIndex: "9999" }}
+    >
       <Box display="flex" gap={2}>
         {FILTER_FIELDS.map(({ key, label, type, grouped, options = [] }) =>
           type === "text" ? (
@@ -24,6 +21,7 @@ const Filters = ({ filter = {}, setFilter = () => {} }) => {
               key={key}
               value={filter[key]}
               label={label}
+              onChange={(e) => handleChange(key, e.target.value)}
             />
           ) : (
             <Select
