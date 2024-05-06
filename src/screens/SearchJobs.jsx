@@ -44,14 +44,15 @@ const SearchJobs = () => {
       );
     });
   };
+  const data = filterData(jobs);
 
   const onScroll = React.useCallback(async () => {
     if (
-      window.innerHeight + window.scrollY >= document.body.offsetHeight - 200 &&
+      window.innerHeight + window.scrollY >= document.body.offsetHeight - 250 &&
       !loading
     ) {
       setLoading(true);
-      const data = await fetchPosts(offset + 9);
+      const data = await fetchPosts(offset);
       setOffset((of) => of + 9);
       setJobs((pre) => [...pre, ...(data || [])]);
       setLoading(false);
@@ -63,7 +64,8 @@ const SearchJobs = () => {
       (async () => {
         setLoading(true);
         const data = await fetchPosts();
-        setJobs(data || []);
+        setOffset((of) => of + 9);
+        setJobs((pre) => [...pre, ...data]);
         setLoading(false);
       })();
     };
@@ -76,6 +78,18 @@ const SearchJobs = () => {
       document.removeEventListener("scroll", onScroll);
     };
   }, [onScroll]);
+
+  React.useEffect(() => {
+    if (jobs.length && data.length && data.length <= 6 && !loading) {
+      (async () => {
+        setLoading(true);
+        const data = await fetchPosts(offset);
+        setOffset((of) => of + 9);
+        setJobs((pre) => [...pre, ...data]);
+        setLoading(false);
+      })();
+    }
+  }, [data.length, jobs.length, loading, offset]);
 
   return (
     <div style={{ overflow: "hidden" }}>
