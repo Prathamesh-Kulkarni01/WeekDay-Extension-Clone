@@ -1,6 +1,6 @@
 import React from "react";
 import JobCard from "./JobCard";
-import { Box, CircularProgress, Grid, Stack } from "@mui/material";
+import { Box, CircularProgress, Grid } from "@mui/material";
 
 const JobsContainer = ({ jobs = [], loading }) => {
   return (
